@@ -26,7 +26,7 @@ LeanScan takes a list of IP addresses from a .txt file and uses that information
 
 ## Requirements
 - Python 3.7 or newer
-- API keys for supported sources (where applicable):
+- API keys for AbuseIPDB and VirusTotal
   - [AbuseIPDB](https://www.abuseipdb.com/)
   - [VirusTotal](https://www.virustotal.com/)
 
@@ -85,7 +85,7 @@ python3 leanscan.py <file> [-s SOURCES] [-o OUTPUT_FORMATS] [--debug]
    python3 leanscan.py ips.txt --debug
    ```
 
-_Note: If `-o` is not specified, the results will be written to the terminal and not outputted to a file. It is strongly reccomended to putput to a file with larger datasets. Currently, debug output cannot be written out to a file and will be displayed to the terminal. Input file post contain valid external IP addresses, one per line._
+_Note: If `-o` is not specified, the results will be written to the terminal and not outputted to a file. It is strongly reccomended to output to a file with larger datasets. Currently, debug output cannot be written out to a file and will be displayed to the terminal. Input file post contain valid external IP addresses, one per line._
 
 ---
 
@@ -98,7 +98,7 @@ _Note: If `-o` is not specified, the results will be written to the terminal and
 
 ## Limitations
 - Free API limits will apply.
-- Requires valid API keys for AbuseIPDB and VirusTotal, both of which can be obtained by simply vreating account.
+- Requires valid API keys for AbuseIPDB and VirusTotal, both of which can be obtained by simply creating an account.
 - Designed for small-to-medium batch processing. Large datasets may result in rate limits and API limits.
 
 ---
