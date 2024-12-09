@@ -12,7 +12,7 @@
 ---
 
 ## But what does it do?
-LeanScan takes a list of IP addresses from a .txt file and uses that information to query multiple free reputation sources to determine if any of those IPs are potentially associated with malicious activity, abuse, or other threats. It is designed to maximize the information you're able to gather with your free APIs by using a round-robin approach. LeanScan provides concise,  insights that are especially useful for small-to-medium-scale investigations or basic threat intelligence workflows. It works without paid subscriptions, making it an accessible option for budget-conscious users.
+LeanScan takes a list of IP addresses from a .txt file and uses that information to query multiple free reputation sources to determine if any of those IPs are potentially associated with malicious activity, abuse, or other threats. It is designed to maximize the information you're able to gather with your free APIs by using a round-robin approach. LeanScan provides concise insights that are especially useful for small-to-medium-scale investigations or basic threat intelligence workflows. It works without paid subscriptions, making it an accessible option for budget-conscious users.
 
 ---
 
