@@ -85,7 +85,7 @@ python3 leanscan.py <file> [-s SOURCES] [-o OUTPUT_FORMATS] [--debug]
    python3 leanscan.py ips.txt --debug
    ```
 
-_Note: If `-o` is not specified, the results will be written to the terminal and not outputted to a file. It is strongly reccomended to output to a file with larger datasets. Currently, debug output cannot be written out to a file and will be displayed to the terminal. Input file post contain valid external IP addresses, one per line._
+_Note: If `-o` is not specified, the results will be written to the terminal and not outputted to a file. It is strongly reccomended to output to a file with larger datasets. Currently, debug output cannot be written out to a file and will be displayed to the terminal. Input file must contain valid external IP addresses, one per line._
 
 ---
 
