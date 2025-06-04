@@ -7,7 +7,7 @@
 /____/\__/\_,_/_//_/___/\__/\_,_/_//_/
 ```
 
-**LeanScan** is an IP reputation checker witten in Python designed specifically to leverage free lookups and APIs to conduct a base-level reputation check. This tool is designed to provide a quick insight to assist security teams in determining if an IP address has been reported to one of the Intelligence sources and needs to be examined closer. If you're looking for a no-frills solution to quickly assess potential threats, LeanScan has you covered.
+**LeanScan** is an IP reputation checker written in Python designed specifically to leverage free lookups and APIs to conduct a base-level reputation check. This tool is designed to provide a quick insight to assist security teams in determining if an IP address has been reported to one of the Intelligence sources and needs to be examined closer. If you're looking for a no-frills solution to quickly assess potential threats, LeanScan has you covered.
 
 ---
 
@@ -17,8 +17,9 @@ LeanScan takes a list of IP addresses from a .txt file and uses that information
 ---
 
 ## Features
-- Supports multiple reputation sources: **AbuseIPDB**, **VirusTotal**, **OTX (AlienVault)**, and **Spur.us**.
+- Supports multiple reputation sources: **AbuseIPDB**, **VirusTotal**, **OTX (AlienVault)**, **EasyDMARC**, **Scamalytics**, **Shadowserver**, **CriminalIP**, and a fallback to **Spur.us**.
 - Customizable output formats: CSV and TXT.
+- Progress bar with estimated time remaining.
 - Debug mode for detailed logging.
 - Lightweight design with a focus on minimal dependencies.
 
@@ -64,7 +65,7 @@ python3 leanscan.py <file> [-s SOURCES] [-o OUTPUT_FORMATS] [--debug]
 ```
 
 ### Parameters
-- `<file>`: File containing a list of IP addresses to check.
+- `<file>`: File containing a list of IP addresses or hashes to check.
 - `-s, --source`: Specify one or more sources to query (e.g., `virustotal abuseipdb`).
 - `-o, --output`: Specify output formats (`csv`, `txt` or both).
 - `--debug`: Enable debug mode for detailed logs.
@@ -85,7 +86,7 @@ python3 leanscan.py <file> [-s SOURCES] [-o OUTPUT_FORMATS] [--debug]
    python3 leanscan.py ips.txt --debug
    ```
 
-_Note: If `-o` is not specified, the results will be written to the terminal and not outputted to a file. It is strongly reccomended to output to a file with larger datasets. Currently, debug output cannot be written out to a file and will be displayed to the terminal. Input file must contain valid external IP addresses, one per line._
+_Note: If `-o` is not specified, the results will be written to the terminal and not outputted to a file. It is strongly recommended to output to a file with larger datasets. Currently, debug output cannot be written out to a file and will be displayed to the terminal. Input file must contain valid external IP addresses, one per line._
 
 ---
 
