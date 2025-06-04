@@ -36,12 +36,6 @@ Install required libraries using:
 ```bash
 pip install -r requirements.txt
 ```
-
-Required libraries include:
-- `requests`
-- `tqdm`
-- `colorama`
-
 ---
 
 ## Installation
