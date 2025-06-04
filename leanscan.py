@@ -15,7 +15,7 @@ init(autoreset=True)
 # Argument parsing
 parser = argparse.ArgumentParser(
     description="Check IP reputation using various sources.",
-    epilog="Example: python3 bad-ip-checker.py ips.txt -s virustotal abuseipdb -o csv txt --debug"
+    epilog="Example: python3 leanscan.py ips.txt -s virustotal abuseipdb -o csv txt --debug"
 )
 parser.add_argument("file", help="File containing IP addresses / hashes to check.")
 parser.add_argument("--debug", action="store_true", help="Enable debug output.")
