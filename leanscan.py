@@ -517,7 +517,7 @@ for indicator in indicators:
     if not result_found and not is_hash(indicator) and "check_spur_us" in [f.__name__ for f in sources]:
         if check_spur_us(indicator):
             malicious_sources.append("Spur.us")
-            results.append(build_result(ip, "spur_us", report_links))
+            results.append(build_result(indicator, "spur_us", report_links))
 
 
     # If no results were found and debug mode is enabled, print a message
