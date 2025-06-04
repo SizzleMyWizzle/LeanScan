@@ -34,7 +34,7 @@ LeanScan takes a list of IP addresses from a .txt file and uses that information
 ### Python Dependencies
 Install required libraries using:
 ```bash
-pip install requests tqdm colorama
+pip install -r requirements.txt
 ```
 
 Required libraries include:
