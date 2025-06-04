@@ -30,9 +30,9 @@ ABUSEIPDB_API_KEY = "XXXXX"
 # Check that the API Keys are present. If not, warn user.
 def validate_and_warn_api_keys(debug=False):
     missing_keys = []
-    if VIRUSTOTAL_API_KEY == "XXXX":
+    if VIRUSTOTAL_API_KEY == "XXXXX":
         missing_keys.append("VirusTotal")
-    if ABUSEIPDB_API_KEY == "XXXX":
+    if ABUSEIPDB_API_KEY == "XXXXX":
         missing_keys.append("AbuseIPDB")
 
     if missing_keys:
@@ -49,10 +49,10 @@ def validate_and_warn_api_keys(debug=False):
                 time.sleep(2)
 # Throw error is source requested as no API Key
 def validate_selected_sources(debug=False):
-    if "abuseipdb" in args.source and ABUSEIPDB_API_KEY == "XXXX":
+    if "abuseipdb" in args.source and ABUSEIPDB_API_KEY == "XXXXX":
         print(Fore.RED + "Error: AbuseIPDB source selected but API key is not configured.")
         sys.exit(1)
-    if "virustotal" in args.source and VIRUSTOTAL_API_KEY == "XXXX":
+    if "virustotal" in args.source and VIRUSTOTAL_API_KEY == "XXXXX":
         print(Fore.RED + "Error: VirusTotal source selected but API key is not configured.")
         sys.exit(1)
 
@@ -158,7 +158,7 @@ def request_with_retries(url, headers=None, params=None, timeout=10, max_retries
 
 # Check IP reputation using VirusTotal
 def check_virustotal(value):
-    if VIRUSTOTAL_API_KEY == "XXXX":
+    if VIRUSTOTAL_API_KEY == "XXXXX":
         return False
 
     if is_hash(value):
@@ -199,7 +199,7 @@ def check_virustotal(value):
 
 # Check IP reputation using AbuseIPDB
 def check_abuseipdb(indicator):
-    if ABUSEIPDB_API_KEY == "XXXX":
+    if ABUSEIPDB_API_KEY == "XXXXX":
         return False
 
     if DEBUG:
@@ -434,8 +434,21 @@ all_sources = {
 
 
 # Determine the sources to use
-default_sources = ["abuseipdb", "virustotal", "otx", "easydmarc", "scamalytics", "criminalip"]
-sources = [all_sources[source] for source in SELECTED_SOURCES] if SELECTED_SOURCES else [all_sources[s] for s in default_sources]
+default_sources = [
+    "abuseipdb",
+    "virustotal",
+    "otx",
+    "easydmarc",
+    "scamalytics",
+    "criminalip",
+]
+
+# Resolve the functions for the user requested or default sources
+selected_functions = (
+    [all_sources[name] for name in SELECTED_SOURCES]
+    if SELECTED_SOURCES
+    else [all_sources[name] for name in default_sources]
+)
 
 
 # Main processing loop
@@ -446,17 +459,15 @@ start_time = time.time()
 
 progress_bar = None
 if not DEBUG:
-    progress_bar = tqdm(total=TOTAL_INDICATORS, desc="Processing...", bar_format="{l_bar}{bar}| {n_fmt}/{total_fmt} | {postfix}")
+    progress_bar = tqdm(
+        total=TOTAL_INDICATORS,
+        desc="Processing...",
+        bar_format="{l_bar}{bar}| {n_fmt}/{total_fmt} | {postfix}",
+    )
 
-#index trackers
+# Exclude the Spur.us fallback from the primary rotation
 unified_pool = [
-    check_virustotal,
-    check_shadowserver,
-    check_abuseipdb,
-    check_otx,
-    check_easydmarc,
-    check_scamalytics,
-    check_criminalip
+    func for func in selected_functions if func.__name__ != "check_spur_us"
 ]
 rotation_index = 0
 
@@ -514,7 +525,7 @@ for indicator in indicators:
 
 
     # Fallback to Spur if no results found and it's an IP
-    if not result_found and not is_hash(indicator) and "check_spur_us" in [f.__name__ for f in sources]:
+    if not result_found and not is_hash(indicator) and "check_spur_us" in [f.__name__ for f in selected_functions]:
         if check_spur_us(indicator):
             malicious_sources.append("Spur.us")
             results.append(build_result(indicator, "spur_us", report_links))
