@@ -337,7 +337,10 @@ def check_scamalytics(indicator):
     if DEBUG:
         print(f"Trying Scamalytics for {indicator}...", end=" ")
     url = f"https://scamalytics.com/ip/{indicator}"
-    response = request_with_retries(url, timeout=10)
+    headers = {
+        "User-Agent": "Mozilla/5.0"
+    }
+    response = request_with_retries(url, headers=headers, timeout=10)
     if response:
         if response.status_code == 200:
             try:
