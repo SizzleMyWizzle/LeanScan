@@ -29,3 +29,10 @@ def test_rejects_private_or_reserved_ip():
 
 def test_accepts_hash():
     assert validate_input("a" * 32) is True
+
+def test_accepts_public_ipv6():
+    assert validate_input("2001:4860:4860::8888") is True
+
+def test_rejects_reserved_ipv6():
+    assert validate_input("fc00::1") is False
+    assert validate_input("::") is False
