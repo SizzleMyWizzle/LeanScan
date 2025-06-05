@@ -501,7 +501,7 @@ for indicator in indicators:
             "easydmarc": f"https://easydmarc.com/tools/ip-domain-reputation-check?term={indicator}",
             "scamalytics": f"https://scamalytics.com/ip/{indicator}",
             "shadowserver": f"N/A",
-            "criminalip": "https://www.criminalip.io/asset/report/{indicator}"
+            "criminalip": f"https://www.criminalip.io/asset/report/{indicator}"
         }
 
 
