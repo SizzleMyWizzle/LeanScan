@@ -27,7 +27,7 @@ LeanScan takes a list of IP addresses from a .txt file and uses that information
 
 ## Requirements
 - Python 3.7 or newer
-- API keys for AbuseIPDB and VirusTotal
+- API keys for AbuseIPDB and VirusTotal provided via environment variables
   - [AbuseIPDB](https://www.abuseipdb.com/)
   - [VirusTotal](https://www.virustotal.com/)
 
@@ -41,8 +41,11 @@ LeanScan takes a list of IP addresses from a .txt file and uses that information
    ```bash
    pip install -r requirements.txt
    ```
-3. Update API keys in the script:
-   Replace `XXXXX` in the `VIRUSTOTAL_API_KEY` and `ABUSEIPDB_API_KEY` variables with your actual API keys.
+3. Set your API keys as environment variables:
+   ```bash
+   export VIRUSTOTAL_API_KEY=<your_key>
+   export ABUSEIPDB_API_KEY=<your_key>
+   ```
 
 ---
 
