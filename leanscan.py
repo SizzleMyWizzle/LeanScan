@@ -157,19 +157,19 @@ def request_with_retries(url, headers=None, params=None, timeout=10, max_retries
     return None
 
 # Check IP reputation using VirusTotal
-def check_virustotal(value):
+def check_virustotal(indicator):
     if VIRUSTOTAL_API_KEY == "XXXXX":
         return False
 
-    if is_hash(value):
+    if is_hash(indicator):
         if DEBUG:
-            print(f"Trying VirusTotal for hash {value}...", end=" ")
-        url = f"https://www.virustotal.com/api/v3/files/{value}"
+            print(f"Trying VirusTotal for hash {indicator}...", end=" ")
+        url = f"https://www.virustotal.com/api/v3/files/{indicator}"
         time.sleep(10)
     else:
         if DEBUG:
-            print(f"Trying VirusTotal for IP {value}...", end=" ")
-        url = f"https://www.virustotal.com/api/v3/ip_addresses/{value}"
+            print(f"Trying VirusTotal for IP {indicator}...", end=" ")
+        url = f"https://www.virustotal.com/api/v3/ip_addresses/{indicator}"
         time.sleep(10)
 
     headers = {"x-apikey": VIRUSTOTAL_API_KEY}
@@ -237,16 +237,16 @@ def check_abuseipdb(indicator):
 
 
 # Check IP reputation using OTX
-def check_otx(value):
-    if is_hash(value):
+def check_otx(indicator):
+    if is_hash(indicator):
         if DEBUG:
-            print(f"Trying OTX for hash {value}...", end=" ")
-        url = f"https://otx.alienvault.com/api/v1/indicator/file/{value}/general"
+            print(f"Trying OTX for hash {indicator}...", end=" ")
+        url = f"https://otx.alienvault.com/api/v1/indicator/file/{indicator}/general"
         threshold = 2 # Accept only if 2 or more pulses for a hash
     else:
         if DEBUG:
-            print(f"Trying OTX for IP {value}...", end=" ")
-        url = f"https://otx.alienvault.com/api/v1/indicators/IPv4/{value}/general"
+            print(f"Trying OTX for IP {indicator}...", end=" ")
+        url = f"https://otx.alienvault.com/api/v1/indicators/IPv4/{indicator}/general"
         threshold = 0  # Accept any pulse count for IPs
 
     time.sleep(5)
@@ -368,10 +368,10 @@ def check_scamalytics(indicator):
         return False
 
 # Check hash reputation using Shadowserver
-def check_shadowserver(hash_value):
+def check_shadowserver(indicator):
     if DEBUG:
-        print(f"Trying Shadowserver for hash {hash_value}...", end=" ")
-    url = f"https://api.shadowserver.org/malware/info?sample={hash_value}"
+        print(f"Trying Shadowserver for hash {indicator}...", end=" ")
+    url = f"https://api.shadowserver.org/malware/info?sample={indicator}"
     response = request_with_retries(url, timeout=10)
 
     if response:
