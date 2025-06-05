@@ -42,7 +42,7 @@ LeanScan takes a list of IP addresses from a .txt file and uses that information
    pip install -r requirements.txt
    ```
 3. Update API keys in the script:
-   Replace `XXXX` in the `VIRUSTOTAL_API_KEY` and `ABUSEIPDB_API_KEY` variables with your actual API keys.
+   Replace `XXXXX` in the `VIRUSTOTAL_API_KEY` and `ABUSEIPDB_API_KEY` variables with your actual API keys.
 
 ---
 
