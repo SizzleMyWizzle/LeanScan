@@ -455,7 +455,6 @@ selected_functions = (
 
 
 # Main processing loop
-source_index = 0
 results = []
 last_update_time = time.time()
 start_time = time.time()
