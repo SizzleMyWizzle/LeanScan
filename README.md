@@ -31,13 +31,6 @@ LeanScan takes a list of IP addresses from a .txt file and uses that information
   - [AbuseIPDB](https://www.abuseipdb.com/)
   - [VirusTotal](https://www.virustotal.com/)
 
-### Python Dependencies
-Install required libraries using:
-```bash
-pip install -r requirements.txt
-```
----
-
 ## Installation
 1. Clone the repository:
    ```bash
@@ -46,7 +39,7 @@ pip install -r requirements.txt
    ```
 2. Install dependencies:
    ```bash
-   pip install requests tqdm colorama
+   pip install -r requirements.txt
    ```
 3. Update API keys in the script:
    Replace `XXXX` in the `VIRUSTOTAL_API_KEY` and `ABUSEIPDB_API_KEY` variables with your actual API keys.
