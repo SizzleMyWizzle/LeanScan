@@ -479,7 +479,6 @@ for indicator in indicators:
             progress_bar.update(1)
         continue
 
-    malicious_sources = []
     if is_hash(indicator):
         report_links = {
             "abuseipdb": "N/A",
