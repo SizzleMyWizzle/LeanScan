@@ -1,36 +1,7 @@
-import os
-import ast
-import re
-import ipaddress
+import os, sys
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), os.pardir)))
 import requests
-import colorama
-
-
-def load_functions(*names):
-    path = os.path.join(os.path.dirname(__file__), os.pardir, "leanscan.py")
-    with open(path, "r") as f:
-        source = f.read()
-    tree = ast.parse(source, filename=path)
-
-    env = {
-        "ipaddress": ipaddress,
-        "re": re,
-        "requests": requests,
-        "Fore": colorama.Fore,
-        "DEBUG": False,
-    }
-    loaded = {}
-    for node in tree.body:
-        if isinstance(node, ast.FunctionDef) and node.name in names:
-            compiled = compile(ast.Module([node], type_ignores=[]), path, "exec")
-            exec(compiled, env)
-            loaded[node.name] = env[node.name]
-    return loaded
-
-funcs = load_functions("is_hash", "request_with_retries")
-
-is_hash = funcs["is_hash"]
-request_with_retries = funcs["request_with_retries"]
+from leanscan.utils import is_hash, request_with_retries
 
 
 class DummyResponse:
@@ -51,7 +22,7 @@ def test_is_hash_invalid_cases():
 
 
 def test_request_success_no_retry(monkeypatch):
-    def fake_get(url, headers=None, params=None, timeout=10):
+    def fake_get(url, headers=None, params=None, timeout=10, debug=False):
         return DummyResponse(200)
 
     monkeypatch.setattr(requests, "get", fake_get)
@@ -63,7 +34,7 @@ def test_request_success_no_retry(monkeypatch):
 def test_request_timeout_then_success(monkeypatch):
     calls = {"count": 0}
 
-    def fake_get(url, headers=None, params=None, timeout=10):
+    def fake_get(url, headers=None, params=None, timeout=10, debug=False):
         if calls["count"] == 0:
             calls["count"] += 1
             raise requests.exceptions.ReadTimeout
@@ -76,7 +47,7 @@ def test_request_timeout_then_success(monkeypatch):
 
 
 def test_request_rate_limit(monkeypatch):
-    def fake_get(url, headers=None, params=None, timeout=10):
+    def fake_get(url, headers=None, params=None, timeout=10, debug=False):
         return DummyResponse(429)
 
     monkeypatch.setattr(requests, "get", fake_get)
@@ -85,7 +56,7 @@ def test_request_rate_limit(monkeypatch):
 
 
 def test_request_exception(monkeypatch):
-    def fake_get(url, headers=None, params=None, timeout=10):
+    def fake_get(url, headers=None, params=None, timeout=10, debug=False):
         raise requests.exceptions.RequestException("fail")
 
     monkeypatch.setattr(requests, "get", fake_get)
