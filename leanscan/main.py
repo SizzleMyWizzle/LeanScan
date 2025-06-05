@@ -3,6 +3,7 @@ from __future__ import annotations
 import argparse
 import csv
 import sys
+import time
 from typing import Iterable, List
 
 from colorama import Fore, Style, init
@@ -103,7 +104,8 @@ def run(
 
     results = []
     last_update_time = 0.0
-    start_time = tqdm._time()
+    # use the standard library for timing instead of the removed tqdm._time()
+    start_time = time.time()
 
     for indicator in indicators:
         if not validate_input(indicator, debug=debug):
@@ -161,7 +163,8 @@ def run(
         if progress_bar:
             progress_bar.update(1)
 
-        current_time = tqdm._time()
+        # compute progress using the same time source
+        current_time = time.time()
         elapsed_time = current_time - start_time
         processed = progress_bar.n if progress_bar else len(results)
         remaining_time = 0
