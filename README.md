@@ -17,17 +17,16 @@ LeanScan takes a list of IP addresses from a .txt file and uses that information
 ---
 
 ## Features
-- Supports multiple reputation sources: **AbuseIPDB**, **VirusTotal**, **OTX (AlienVault)**, **EasyDMARC**, **Scamalytics**, **Shadowserver**, **CriminalIP**, and a fallback to **Spur.us**.
+- Supports multiple reputation sources: **AbuseIPDB**, **VirusTotal**, **OTX (AlienVault)**, **EasyDMARC**, **Scamalytics**, **Shadowserver**, **CriminalIP**, and **Spur.us**.
 - Customizable output formats: CSV and TXT.
-- Progress bar with estimated time remaining.
 - Debug mode for detailed logging.
-- Lightweight design with a focus on minimal dependencies.
+- Lightweight design.
 
 ---
 
 ## Requirements
 - Python 3.7 or newer
-- API keys for AbuseIPDB and VirusTotal provided via environment variables
+- API keys for AbuseIPDB and VirusTotal provided via environment variables (not required but strongly recommended.)
   - [AbuseIPDB](https://www.abuseipdb.com/)
   - [VirusTotal](https://www.virustotal.com/)
 
@@ -83,27 +82,20 @@ _Note: If `-o` is not specified, the results will be written to the terminal and
 ## Output
 - **CSV**: Results are saved to `results.csv`.
 - **TXT**: Results are saved to `results.txt`.
-- **Console**: If no output format is specified, results are printed to the console.
+- **Terminal**: If no output format is specified, results are printed to the terminal.
 
 ---
 
 ## Limitations
 - Free API limits will apply.
-- Requires valid API keys for AbuseIPDB and VirusTotal, both of which can be obtained by simply creating an account.
-- Designed for small-to-medium batch processing. Large datasets may result in rate limits and API limits.
+- Highly recommended to use API keys for AbuseIPDB and VirusTotal, both of which can be obtained by simply creating an account.
+- Designed for small-to-medium batch processing. Larger datasets will likely introduce server-side rate limiting. Leanscan has been tuned to mitigate this as much as possible. 
+
 
 ---
 
 ## License
 This project is licensed under the [MIT License](LICENSE).
-
----
-
-## Acknowledgments
-- [AbuseIPDB](https://www.abuseipdb.com/)
-- [VirusTotal](https://www.virustotal.com/)
-- [OTX AlienVault](https://otx.alienvault.com/)
-- [Spur.us](https://spur.us/)
 
 ---
 
